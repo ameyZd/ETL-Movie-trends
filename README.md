@@ -14,33 +14,9 @@ The project has two execution modes:
 This makes the project useful both as an Airflow learning project and as a practical low-cost cloud data pipeline.
 
 ## Architecture
+<img width="1024" height="612" alt="Tmdb-etl-architecutre" src="https://github.com/user-attachments/assets/985a6f47-a89e-4468-b130-ff8ab7f1edec" />
 
-```mermaid
-flowchart LR
-    TMDB[TMDB API] --> Shared[Shared ETL Module]
 
-    subgraph Local[Local Airflow Mode]
-        Airflow[Apache Airflow on Astro Docker]
-        Extract[Extract Task]
-        Transform[Transform Task]
-        Load[Load Task]
-        Airflow --> Extract --> Transform --> Load
-    end
-
-    subgraph AWS[AWS Scheduled Mode]
-        Scheduler[EventBridge Scheduler]
-        Lambda[AWS Lambda Container]
-        Logs[CloudWatch Logs]
-        Scheduler --> Lambda
-        Lambda --> Logs
-    end
-
-    Extract --> Shared
-    Transform --> Shared
-    Lambda --> Shared
-    Shared --> S3[Amazon S3 Parquet Storage]
-    Load --> S3
-```
 
 ## Tech Stack
 
