@@ -1,0 +1,15 @@
+astro
+.git
+.env
+airflow_settings.yaml
+logs/
+.venv/
+.vscode/
+.pytest_cache/
+pytest-cache-files-*
+airflow.db
+airflow.cfg
+.docker-temp/
+.venv
+airflow.db
+airflow.cfg

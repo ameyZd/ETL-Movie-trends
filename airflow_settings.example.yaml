@@ -1,0 +1,28 @@
+# Local development example only.
+# Copy this to airflow_settings.yaml and replace placeholder values locally.
+# Do not commit real tokens, AWS access keys, or secrets.
+
+airflow:
+  connections:
+    - conn_id: aws_default
+      conn_type: aws
+      conn_host:
+      conn_schema:
+      conn_login: YOUR_AWS_ACCESS_KEY_ID
+      conn_password: YOUR_AWS_SECRET_ACCESS_KEY
+      conn_port:
+      conn_extra:
+        region_name: us-east-1
+  pools:
+    - pool_name:
+      pool_slot:
+      pool_description:
+  variables:
+    - variable_name: tmdb_access_token
+      variable_value: YOUR_TMDB_API_READ_ACCESS_TOKEN
+    - variable_name: tmdb_s3_bucket
+      variable_value: YOUR_S3_BUCKET_NAME
+    - variable_name: tmdb_s3_prefix_weekly
+      variable_value: tmdb/trending/weekly
+    - variable_name: tmdb_aws_conn_id
+      variable_value: aws_default

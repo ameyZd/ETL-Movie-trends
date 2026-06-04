@@ -1,0 +1,29 @@
+.DS_Store
+
+# Local secrets and environment files
+.env
+.env.*
+!.env.example
+airflow_settings.yaml
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+.pytest_cache/
+pytest-cache-files-*
+.venv/
+venv/
+
+# Airflow/Astro local runtime files
+astro
+.astro/standalone/
+logs/
+airflow-webserver.pid
+webserver_config.py
+airflow.cfg
+airflow.db
+
+# Local editor and Docker temp files
+.vscode/
+.docker-temp/
