@@ -4,6 +4,9 @@
 .env
 .env.*
 !.env.example
+chrome-extension/.env
+chrome-extension/.env.*
+!chrome-extension/.env.example
 airflow_settings.yaml
 
 # Python
@@ -27,3 +30,8 @@ airflow.db
 # Local editor and Docker temp files
 .vscode/
 .docker-temp/
+
+# Frontend dependencies/build output
+node_modules/
+chrome-extension/node_modules/
+chrome-extension/dist/

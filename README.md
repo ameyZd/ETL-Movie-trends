@@ -2,7 +2,7 @@
 
 Weekly movie trends data pipeline built with Apache Airflow, AWS Lambda, EventBridge Scheduler, and Amazon S3.
 
-This project fetches weekly trending movies from TMDB, enriches each movie with detail metadata, converts the dataset to parquet, and stores weekly snapshots in Amazon S3.
+This project fetches weekly trending movies from TMDB, enriches each movie with detail metadata, converts the dataset to parquet, and stores weekly snapshots in Amazon S3. Each run also publishes small dashboard-ready JSON files for visualization.
 
 ## Why This Project Exists
 
@@ -65,6 +65,16 @@ Example prefix:
 tmdb/trending/weekly
 ```
 
+The pipeline also writes dashboard JSON files using this layout:
+
+```text
+s3://<bucket>/<prefix>/dashboard/latest.json
+s3://<bucket>/<prefix>/dashboard/manifest.json
+s3://<bucket>/<prefix>/dashboard/weeks/YYYY-MM-DD.json
+```
+
+These JSON files are intended for a lightweight Streamlit dashboard. They are generated for new runs going forward; existing historical parquet files are not converted unless a separate backfill script is run.
+
 ## Local Airflow Setup
 
 1. Install Docker Desktop.
@@ -80,6 +90,7 @@ Copy-Item airflow_settings.example.yaml airflow_settings.yaml
 - `tmdb_access_token`
 - `tmdb_s3_bucket`
 - `tmdb_s3_prefix_weekly`
+- `tmdb_s3_prefix_dashboard`
 - `tmdb_aws_conn_id`
 - `aws_default` connection credentials
 
@@ -111,6 +122,12 @@ Required Lambda environment variables:
 - `S3_BUCKET`
 - `S3_PREFIX`
 
+Optional Lambda environment variable:
+
+- `S3_DASHBOARD_PREFIX`
+
+If `S3_DASHBOARD_PREFIX` is not set, the Lambda writes dashboard JSON under `<S3_PREFIX>/dashboard`.
+
 Build and push the Lambda image:
 
 ```powershell
@@ -124,3 +141,39 @@ Final weekly schedule:
 - Timezone: `America/New_York`
 - Cron: `0 18 ? * FRI *`
 - Meaning: every Friday at 6:00 PM US Eastern Time
+
+## Security Notes
+
+Do not commit real secrets.
+
+These files are intentionally ignored:
+
+- `.env`
+- `airflow_settings.yaml`
+- `.venv/`
+- Airflow local runtime files
+- Python cache files
+
+Use the example files for documentation:
+
+- `.env.example`
+- `airflow_settings.example.yaml`
+
+## Documentation
+
+Helpful project notes live in `docs/`:
+
+- `local_and_aws_walkthrough.md`
+- `TMDB_Weekly_Trends_ETL_Local_and_AWS_Walkthrough.pdf`
+- `github_release_checklist.md`
+- `medium_article_outline.md`
+- `video_demo_script.md`
+
+## Future Improvements
+
+- Add data quality checks before upload.
+- Add failure alerts for Lambda or Airflow runs.
+- Store raw TMDB responses in a bronze S3 layer.
+- Add GitHub Actions to build and push the Lambda image automatically.
+- Add an Athena table over the S3 parquet output.
+- Add a public Streamlit dashboard that reads the generated JSON files.
