@@ -24,5 +24,7 @@ airflow:
       variable_value: YOUR_S3_BUCKET_NAME
     - variable_name: tmdb_s3_prefix_weekly
       variable_value: tmdb/trending/weekly
+    - variable_name: tmdb_s3_prefix_dashboard
+      variable_value: tmdb/trending/weekly/dashboard
     - variable_name: tmdb_aws_conn_id
       variable_value: aws_default
