@@ -19,6 +19,7 @@ log = logging.getLogger(__name__)
 TMDB_LANGUAGE = "en-US"
 TMDB_TRENDING_URL = "https://api.themoviedb.org/3/trending/movie/week"
 TMDB_MOVIE_DETAILS_URL = "https://api.themoviedb.org/3/movie/{movie_id}"
+TMDB_POSTER_BASE_URL = "https://image.tmdb.org/t/p/w500"
 DEFAULT_S3_PREFIX = "trending-movies/"
 DEFAULT_DASHBOARD_PREFIX = "dashboard"
 REQUEST_TIMEOUT_SECONDS = 30
@@ -111,6 +112,11 @@ def build_enriched_records(
                         "original_language": details.get("original_language"),
                         "overview": details.get("overview", ""),
                         "tmdb_url": f"https://www.themoviedb.org/movie/{movie_id}",
+                        "poster_url": (
+                            f"{TMDB_POSTER_BASE_URL}{details['poster_path']}"
+                            if details.get("poster_path")
+                            else None
+                        ),
                         "fetched_at": fetched_at,
                     }
                 )

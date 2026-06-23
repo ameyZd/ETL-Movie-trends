@@ -30,6 +30,7 @@ def test_dashboard_payload_is_json_serializable():
                 "title": "Example Movie",
                 "popularity": 99.5,
                 "runtime": None,
+                "poster_url": "https://image.tmdb.org/t/p/w500/example.jpg",
             }
         ]
     )
@@ -46,6 +47,7 @@ def test_dashboard_payload_is_json_serializable():
     assert decoded["row_count"] == 1
     assert decoded["movies"][0]["title"] == "Example Movie"
     assert decoded["movies"][0]["runtime"] is None
+    assert decoded["movies"][0]["poster_url"].endswith("example.jpg")
 
 
 def test_dashboard_manifest_replaces_same_week_and_sorts_latest_first():

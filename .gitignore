@@ -30,6 +30,7 @@ airflow.db
 # Local editor and Docker temp files
 .vscode/
 .docker-temp/
+streamlit_dashboard/.streamlit/secrets.toml
 
 # Frontend dependencies/build output
 node_modules/
