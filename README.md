@@ -4,6 +4,12 @@ Weekly movie trends data pipeline built with Apache Airflow, AWS Lambda, EventBr
 
 This project fetches weekly trending movies from TMDB, enriches each movie with detail metadata, converts the dataset to parquet, and stores weekly snapshots in Amazon S3. Each run also publishes small dashboard-ready JSON files for visualization.
 
+## Live Dashboard
+
+[Open the TMDB Weekly Trends dashboard](https://amey-tmdb-weekly-trends.streamlit.app/)
+
+The Streamlit dashboard turns each weekly S3 snapshot into a simple movie discovery experience with trending, critics, and balanced recommendations, movie exploration, and historical analytics as more weekly snapshots arrive.
+
 ## Why This Project Exists
 
 The project has two execution modes:
@@ -33,6 +39,8 @@ This makes the project useful both as an Airflow learning project and as a pract
 - EventBridge Scheduler
 - Amazon S3
 - CloudWatch Logs
+- Streamlit
+- Plotly
 
 ## Repository Structure
 
@@ -48,6 +56,10 @@ requirements.txt             Airflow project dependencies
 requirements-lambda.txt      Lambda image dependencies
 airflow_settings.example.yaml Local Airflow config template
 .env.example                 Lambda-style environment variable template
+streamlit_dashboard/
+  app.py                     Streamlit application entry point
+  dashboard/                 Data access, analytics, styling, and page modules
+  requirements.txt           Dashboard-only dependencies
 docs/                        Walkthrough, checklist, article outline, demo script
 ```
 
@@ -73,7 +85,17 @@ s3://<bucket>/<prefix>/dashboard/manifest.json
 s3://<bucket>/<prefix>/dashboard/weeks/YYYY-MM-DD.json
 ```
 
-These JSON files are intended for a lightweight Streamlit dashboard. They are generated for new runs going forward; existing historical parquet files are not converted unless a separate backfill script is run.
+These JSON files power the [live Streamlit dashboard](https://amey-tmdb-weekly-trends.streamlit.app/). The dashboard reads the compact JSON contract rather than querying Parquet directly, keeping the public demo lightweight and inexpensive. They are generated for new runs going forward; existing historical parquet files are not converted unless a separate backfill script is run.
+
+## Dashboard Features
+
+The dashboard is a thin visualization layer over the S3 dashboard JSON files. It includes:
+
+- **Discover:** trending, critics, and balanced movie recommendations.
+- **Movie Explorer:** movie metadata, ratings, genres, runtime, overview, and TMDB links.
+- **Historical Analytics:** popularity and rank movement once multiple weekly snapshots exist.
+
+The S3 bucket remains private. Streamlit uses a read-only IAM identity configured as deployment secrets, never committed to this repository.
 
 ## Local Airflow Setup
 
@@ -169,11 +191,3 @@ Helpful project notes live in `docs/`:
 - `medium_article_outline.md`
 - `video_demo_script.md`
 
-## Future Improvements
-
-- Add data quality checks before upload.
-- Add failure alerts for Lambda or Airflow runs.
-- Store raw TMDB responses in a bronze S3 layer.
-- Add GitHub Actions to build and push the Lambda image automatically.
-- Add an Athena table over the S3 parquet output.
-- Add a public Streamlit dashboard that reads the generated JSON files.
