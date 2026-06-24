@@ -14,8 +14,7 @@ The project has two execution modes:
 This makes the project useful both as an Airflow learning project and as a practical low-cost cloud data pipeline.
 
 ## Architecture
-<img width="1452" height="737" alt="Tmdb-etl-architecutre" src="https://github.com/user-attachments/assets/c62db341-b0a9-44a7-a7c3-ed8ca32e92be" />
-
+<img width="1030" height="450" alt="Untitled Diagram drawio (1)" src="https://github.com/user-attachments/assets/316e3fc2-7c01-42d3-86f0-4f9ce2978bb9" />
 
 
 
