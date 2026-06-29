@@ -8,11 +8,12 @@ This project fetches weekly trending movies from TMDB, enriches each movie with 
 
 [Open the TMDB Weekly Trends dashboard](https://amey-tmdb-weekly-trends.streamlit.app/)
 
+
+The Streamlit dashboard turns each weekly S3 snapshot into a simple movie discovery experience with trending, critics, and balanced recommendations, movie exploration, and historical analytics as more weekly snapshots arrive.
+
 ## Demo Video
 
 [Watch the project walkthrough](https://drive.google.com/file/d/19MBK1F18dUHmyx7ESQ-pvoqjBWgfj1ln/view?usp=sharing)
-
-The Streamlit dashboard turns each weekly S3 snapshot into a simple movie discovery experience with trending, critics, and balanced recommendations, movie exploration, and historical analytics as more weekly snapshots arrive.
 
 ## Why This Project Exists
 
