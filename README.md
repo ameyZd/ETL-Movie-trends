@@ -5,9 +5,9 @@ Weekly movie trends data pipeline built with Apache Airflow, AWS Lambda, EventBr
 This project fetches weekly trending movies from TMDB, enriches each movie with detail metadata, converts the dataset to parquet, and stores weekly snapshots in Amazon S3. Each run also publishes small dashboard-ready JSON files for visualization.
 
 ## Project Links
-[Open the TMDB Weekly Trends dashboard](https://amey-tmdb-weekly-trends.streamlit.app/)
-[Watch the project walkthrough](https://drive.google.com/file/d/19MBK1F18dUHmyx7ESQ-pvoqjBWgfj1ln/view?usp=sharing)
-[Medium Article](https://medium.com/@ameydhote007/turning-movie-night-confusion-into-a-data-engineering-project-%EF%B8%8F-2b63a607d389)
+- [Open the TMDB Weekly Trends dashboard](https://amey-tmdb-weekly-trends.streamlit.app/) 
+- [Watch the project walkthrough](https://drive.google.com/file/d/19MBK1F18dUHmyx7ESQ-pvoqjBWgfj1ln/view?usp=sharing) 
+- [Medium Article](https://medium.com/@ameydhote007/turning-movie-night-confusion-into-a-data-engineering-project-%EF%B8%8F-2b63a607d389) 
 
 ## Why This Project Exists
 
