@@ -8,6 +8,10 @@ This project fetches weekly trending movies from TMDB, enriches each movie with 
 
 [Open the TMDB Weekly Trends dashboard](https://amey-tmdb-weekly-trends.streamlit.app/)
 
+## Demo Video
+
+[Watch the project walkthrough](https://drive.google.com/file/d/19MBK1F18dUHmyx7ESQ-pvoqjBWgfj1ln/view?usp=sharing)
+
 The Streamlit dashboard turns each weekly S3 snapshot into a simple movie discovery experience with trending, critics, and balanced recommendations, movie exploration, and historical analytics as more weekly snapshots arrive.
 
 ## Why This Project Exists
@@ -163,30 +167,5 @@ Final weekly schedule:
 - Cron: `0 18 ? * FRI *`
 - Meaning: every Friday at 6:00 PM US Eastern Time
 
-## Security Notes
 
-Do not commit real secrets.
-
-These files are intentionally ignored:
-
-- `.env`
-- `airflow_settings.yaml`
-- `.venv/`
-- Airflow local runtime files
-- Python cache files
-
-Use the example files for documentation:
-
-- `.env.example`
-- `airflow_settings.example.yaml`
-
-## Documentation
-
-Helpful project notes live in `docs/`:
-
-- `local_and_aws_walkthrough.md`
-- `TMDB_Weekly_Trends_ETL_Local_and_AWS_Walkthrough.pdf`
-- `github_release_checklist.md`
-- `medium_article_outline.md`
-- `video_demo_script.md`
 
